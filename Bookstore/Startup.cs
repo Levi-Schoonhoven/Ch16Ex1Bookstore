@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;    // add this
 using Bookstore.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Bookstore
 {
@@ -39,7 +40,7 @@ namespace Bookstore
         }
 
         // Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
@@ -51,6 +52,8 @@ namespace Bookstore
             app.UseAuthorization();    // add this
 
             app.UseSession();
+
+            
 
             app.UseEndpoints(endpoints =>
             {
@@ -75,6 +78,7 @@ namespace Bookstore
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
             });
+            BookstoreContext.CreateAdminUser(app.ApplicationServices).Wait();
         }
     }
 }

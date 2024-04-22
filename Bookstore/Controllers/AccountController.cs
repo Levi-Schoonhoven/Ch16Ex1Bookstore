@@ -30,7 +30,8 @@ namespace Bookstore.Controllers
             if (ModelState.IsValid)
             {
                 var user = new Bookstore.Models.User { UserName = model.Username };
-                var result = await userManager.CreateAsync(user, model.Password);
+                var result = await userManager.CreateAsync(user, model.Password +
+                    model.Firstname + model.Lastname + model.Email);
 
                 if (result.Succeeded)
                 {

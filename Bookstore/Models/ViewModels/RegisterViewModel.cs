@@ -17,5 +17,17 @@ namespace Bookstore.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage ="Please enter a first name,")]
+        [StringLength(255)]
+        public string Firstname { get; set; }
+
+        [Required(ErrorMessage = "Please enter a last name,")]
+        [StringLength(255)]
+        public string Lastname { get; set; }
+
+        [Required(ErrorMessage = "Please enter an Email address. ")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
     }
 }
